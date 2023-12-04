@@ -20,8 +20,8 @@ export class JwtService {
     return this.jwt.decode(token, null);
   }
   public async validateUser(decoded: any): Promise<Auth> {
-    return this.repository.findOne(decoded.id);
-  }
+    return await this.repository.findOne({ where: { id: decoded.id } });
+  }  
   public generateToken(auth: Auth): string {
     return this.jwt.sign({ id: auth.id, email: auth.email });
   }

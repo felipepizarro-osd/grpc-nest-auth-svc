@@ -73,7 +73,7 @@ export class AuthService {
         error: ['Invalid user not found'],
         userId: null,
       };
-      return { status: HttpStatus.OK, error: [], userId: decoded.id };
     }
+    return { status: HttpStatus.OK, error: [], userId: decoded.id };
   }
 }
