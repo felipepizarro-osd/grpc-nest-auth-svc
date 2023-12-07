@@ -3,6 +3,7 @@ import { GrpcMethod } from '@nestjs/microservices';
 import {
   LoginRequestDto,
   RegisterRequestDto,
+  ValidateIdRequestDto,
   ValidateRequestDto,
 } from './auth.dto';
 import {
@@ -10,6 +11,7 @@ import {
   RegisterResponse,
   LoginResponse,
   ValidateResponse,
+  ValidateIdResponse,
 } from './auth.pb';
 import { AuthService } from './service/auth.service';
 
@@ -29,5 +31,10 @@ export class AuthController {
   @GrpcMethod(AUTH_SERVICE_NAME, 'Validate')
   private validate(payload: ValidateRequestDto): Promise<ValidateResponse> {
     return this.service.validate(payload);
+  }
+
+  @GrpcMethod(AUTH_SERVICE_NAME, 'ValidateId')
+  private validateId(payload: ValidateIdRequestDto): Promise<ValidateIdResponse>{
+    return this.service.validateId(payload);
   }
 }

@@ -76,4 +76,16 @@ export class AuthService {
     }
     return { status: HttpStatus.OK, error: [], userId: decoded.id };
   }
+
+  public async validateId({ userId }: { userId: number }): Promise<any> {
+    const auth: Auth = await this.repository.findOne({ where: { id: userId } });
+    if (!auth) {
+      return {
+        status: HttpStatus.UNAUTHORIZED,
+        error: ['Invalid user not found'],
+        userId: null,
+      };
+    }
+    return { status: HttpStatus.OK, error: [], userId: userId };
+  }
 }
