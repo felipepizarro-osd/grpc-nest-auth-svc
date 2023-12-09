@@ -21,20 +21,20 @@ export class AuthController {
   private readonly service: AuthService;
 
   @GrpcMethod(AUTH_SERVICE_NAME, 'Register')
-  private register(payload: RegisterRequestDto): Promise<RegisterResponse> {
+  public register(payload: RegisterRequestDto): Promise<RegisterResponse> {
     return this.service.register(payload);
   }
   @GrpcMethod(AUTH_SERVICE_NAME, 'Login')
-  private login(payload: LoginRequestDto): Promise<LoginResponse> {
+  public login(payload: LoginRequestDto): Promise<LoginResponse> {
     return this.service.login(payload);
   }
   @GrpcMethod(AUTH_SERVICE_NAME, 'Validate')
-  private validate(payload: ValidateRequestDto): Promise<ValidateResponse> {
+  public validate(payload: ValidateRequestDto): Promise<ValidateResponse> {
     return this.service.validate(payload);
   }
 
   @GrpcMethod(AUTH_SERVICE_NAME, 'ValidateId')
-  private validateId(payload: ValidateIdRequestDto): Promise<ValidateIdResponse>{
+  public validateId(payload: ValidateIdRequestDto): Promise<ValidateIdResponse>{
     return this.service.validateId(payload);
   }
 }

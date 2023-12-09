@@ -6,9 +6,10 @@ import {
   RegisterRequestDto,
   LoginRequestDto,
   ValidateRequestDto,
+  ValidateIdRequestDto
 } from '../auth.dto';
 import { Auth } from '../auth.entity';
-import { LoginResponse, RegisterResponse, ValidateResponse } from '../auth.pb';
+import { LoginResponse, RegisterResponse, ValidateIdResponse, ValidateResponse } from '../auth.pb';
 
 @Injectable()
 export class AuthService {
@@ -77,15 +78,14 @@ export class AuthService {
     return { status: HttpStatus.OK, error: [], userId: decoded.id };
   }
 
-  public async validateId({ userId }: { userId: number }): Promise<any> {
+  public async validateId({ userId }: ValidateIdRequestDto): Promise<ValidateIdResponse> {
     const auth: Auth = await this.repository.findOne({ where: { id: userId } });
     if (!auth) {
       return {
         status: HttpStatus.UNAUTHORIZED,
         error: ['Invalid user not found'],
-        userId: null,
       };
     }
-    return { status: HttpStatus.OK, error: [], userId: userId };
+    return { status: HttpStatus.OK, error: []};
   }
 }
